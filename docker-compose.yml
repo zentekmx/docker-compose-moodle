@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  mariadb:
+    image: 'bitnami/mariadb:10.1'
+    volumes:
+    - ${MARIADB_VOLUME:-mariadb-volume}:/bitnami:Z
+    environment:
+      - MARIADB_USER=${MYSQL_USER}
+      - MARIADB_PASSWORD=${MYSQL_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${MYSQL_PASSWORD}
+      - MARIADB_DATABASE=${MYSQL_DATABASE}
+
+  moodle:
+    image: 'bitnami/moodle:3'
+    ports:
+    - '80:80'
+    volumes:
+    - ${MOODLE_VOLUME:-moodle-volume}:/bitnami
+    depends_on:
+    - mariadb
+    environment:
+    - MOODLE_USERNAME=${MOODLE_USERNAME}
+    - MOODLE_PASSWORD=${MOODLE_PASSWORD}
+    - MOODLE_EMAIL=${MOODLE_EMAIL}
+    - MOODLE_DATABASE_USER=${MYSQL_USER}
+    - MOODLE_DATABASE_PASSWORD=${MYSQL_PASSWORD}
+    - MOODLE_DATABASE_NAME=${MYSQL_DATABASE}
+    - MARIADB_HOST=mariadb
+    - MARIADB_PORT_NUMBER=3306
+    - SMTP_HOST=${SMTP_HOST}
+    - SMTP_PORT=${SMTP_PORT}
+    - SMTP_USER=${SMTP_USER}
+    - SMTP_PASSWORD=${SMTP_PASSWORD}
+    - SMTP_PROTOCOL=${SMTP_PROTOCOL}
+
+volumes:
+  mariadb-volume:
+  moodle-volume:
