@@ -7,10 +7,10 @@ services:
     volumes:
     - ${MARIADB_VOLUME:-mariadb-volume}:/bitnami:Z
     environment:
-      - MARIADB_USER=${MYSQL_USER}
-      - MARIADB_PASSWORD=${MYSQL_PASSWORD}
-      - MARIADB_ROOT_PASSWORD=${MYSQL_PASSWORD}
-      - MARIADB_DATABASE=${MYSQL_DATABASE}
+    - MARIADB_USER=${MYSQL_USER}
+    - MARIADB_PASSWORD=${MYSQL_PASSWORD}
+    - MARIADB_ROOT_PASSWORD=${MYSQL_PASSWORD}
+    - MARIADB_DATABASE=${MYSQL_DATABASE}
 
   moodle:
     image: 'bitnami/moodle:3'
@@ -33,7 +33,6 @@ services:
     - SMTP_PORT=${SMTP_PORT}
     - SMTP_USER=${SMTP_USER}
     - SMTP_PASSWORD=${SMTP_PASSWORD}
-    - SMTP_PROTOCOL=${SMTP_PROTOCOL}
 
 volumes:
   mariadb-volume:
