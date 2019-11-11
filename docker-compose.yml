@@ -33,6 +33,7 @@ services:
     - SMTP_PORT=${SMTP_PORT}
     - SMTP_USER=${SMTP_USER}
     - SMTP_PASSWORD=${SMTP_PASSWORD}
+    - SMTP_PROTOCOL=${SMTP_PROTOCOL}
 
 volumes:
   mariadb-volume:
